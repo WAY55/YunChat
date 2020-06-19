@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
-                app.setUser(LoginUtils.tryLogin(loginInfo, HomeActivity.this));
+
             }
         }
 

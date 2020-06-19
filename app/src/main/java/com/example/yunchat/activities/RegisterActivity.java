@@ -119,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity {
     TimePickerView timePickerView;
 
     private LoadingDialog loadingDialog;
-
+    private ExecutorService cachedThreadPool;
     @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -257,12 +257,11 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                 //创建线程池
-                ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+                cachedThreadPool = Executors.newCachedThreadPool();
                 cachedThreadPool.execute(() -> {
                     String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(user), REGISTER_URL, RegisterActivity.this);
                     ReturnResult returnResult = JsonUtils.getResult(result);
-
-
+                    //向主线程传递参数
                     Message message = handler.obtainMessage();
                     message.obj = returnResult;
                     handler.sendMessage(message);
@@ -376,7 +375,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-
+        cachedThreadPool.shutdownNow();
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }

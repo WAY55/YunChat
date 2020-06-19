@@ -23,4 +23,6 @@ public class StringConfig {
     public static final String USERNAME_LENGTH = "用户名长度在4到8之间";
     public static final String PASSWORD_LENGTH = "密码长度在8到16之间";
     public static final String EMAIL_FORMAT_ERROR = "邮箱格式不正确";
+
+    public static final String EXIT_APP = "再按一次退出程序";
 }

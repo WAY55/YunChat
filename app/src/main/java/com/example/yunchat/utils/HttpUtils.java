@@ -61,7 +61,6 @@ public class HttpUtils {
             }
         } catch (Exception e) {
             Toast.makeText(context, "网络连接失败", Toast.LENGTH_SHORT).show();
-
             e.printStackTrace();
         } finally {
             if (reader != null) {

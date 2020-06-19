@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import com.example.yunchat.configs.IpConfig;
 import com.example.yunchat.models.LoginInfo;
 import com.example.yunchat.models.User;
 
@@ -17,7 +18,7 @@ public class LoginUtils {
     /**
      * 登录验证的URL地址
      */
-    private final static String LOGIN_URL = "http://localhost:8080/user/getlogin.do";
+    public final static String LOGIN_URL = "http://"+ IpConfig.getAddress() +"/yunchat/user/login.do";
     /**
      * 存储的key
      */
