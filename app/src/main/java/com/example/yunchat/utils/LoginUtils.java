@@ -42,24 +42,6 @@ public class LoginUtils {
         }
     }
 
-    /**
-     * 尝试进行登录
-     * @param loginInfo 登录信息
-     * @param activity 当前活动
-     * @return 用户信息
-     */
-    public static User tryLogin(LoginInfo loginInfo, Activity activity) {
-        try {
-            //此处要求进行网络请求放后完成
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        saveLoginInfo(loginInfo, activity);
-        return new User("openId-text",
-                loginInfo.getUsername()
-        );
-    }
 
     /**
      * 将登录信息进行永久性存储
