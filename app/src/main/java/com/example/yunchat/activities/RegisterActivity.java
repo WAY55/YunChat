@@ -24,6 +24,7 @@ import com.bigkoo.pickerview.TimePickerView;
 import com.example.yunchat.R;
 import com.example.yunchat.configs.StringConfig;
 import com.example.yunchat.dialogs.LoadingDialog;
+import com.example.yunchat.models.LoginInfo;
 import com.example.yunchat.models.ReturnResult;
 import com.example.yunchat.models.User;
 import com.example.yunchat.utils.HttpUtils;
@@ -171,12 +172,20 @@ public class RegisterActivity extends AppCompatActivity {
                                 .setPositiveButton("确认", (dialog, which) -> {
                                     //关闭对话框
                                     dialog.dismiss();
+
+
+                                    //返回数据到登录界面
+                                    Intent intent = new Intent();
+                                    LoginInfo loginInfo = new LoginInfo(user.getUsername(), user.getPassword());
+                                    intent.putExtra("login_info", loginInfo);
+                                    setResult(RESULT_OK, intent);
                                     //跳转到登录
                                     RegisterActivity.this.finish();
                                     overridePendingTransition(R.anim.close_enter_t, R.anim.close_exit_t);
                                 });
                         builder.create().show();
                     }
+
                     //注册失败
                     if (dialogNum == -1) {
                         builder

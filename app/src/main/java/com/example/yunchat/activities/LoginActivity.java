@@ -85,9 +85,7 @@ public class LoginActivity extends AppCompatActivity{
 
                 //进行登录
                 LoginInfo loginInfo = new LoginInfo(usernameText, passwordText);
-                User user = LoginUtils.tryLogin(loginInfo, LoginActivity.this);
 
-                app.setUser(user);
                 //前往主页面
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
