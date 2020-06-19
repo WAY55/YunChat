@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F2F2F2</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="white">#FFFFFF</color>
+    <color name="button_pink">#FD5E94</color>
+    <color name="home_bottom_tag">#DCDCDC</color>
+    <color name="black">#000000</color>
+    <color name="sex_radio_selected">#80CBC4</color>
+    <color name="button_slate_gray">#708090</color>
+</resources>

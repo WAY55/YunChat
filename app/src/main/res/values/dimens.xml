@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="password_forget_click_text">20sp</dimen>
+    <dimen name="login_goto_register_click_text">20sp</dimen>
+    <dimen name="login_button_text">28sp</dimen>
+    <dimen name="password_input_text">28sp</dimen>
+    <dimen name="username_input_text">28sp</dimen>
+    <dimen name="login_title_text">60sp</dimen>
+</resources>

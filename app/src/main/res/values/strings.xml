@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">YunChat</string>
+    <string name="login_title">Sign In</string>
+    <string name="login_username_hint">Please enter your username</string>
+    <string name="login_pasword_hint">Please enter your password</string>
+    <string name="login_button_submit">Sign In</string>
+    <string name="password_forget">Do you forget the password</string>
+    <string name="login_goto_register">No account？go to register</string>
+    <string name="home_bottom_tag_messages">messages</string>
+    <string name="home_bottom_tag_friends">friends</string>
+    <string name="home_bottom_tag_find">discoveries</string>
+    <string name="home_bottom_tag_my">my</string>
+    <string name="account_htnt">please enter your username</string>
+    <string name="email_htnt">please enter your email</string>
+    <string name="password_htnt">please enter your password</string>
+    <string name="birthday_htnt">please enter your birthday</string>
+    <string name="address_htnt">please enter your address</string>
+    <string name="register">register</string>
+    <string name="confirm_htnt">please enter your password again</string>
+    <string name="new_friend_menu">new friend</string>
+    <string name="messages_more">more</string>
+    <string name="sex_male">male</string>
+    <string name="sex_female">female</string>
+</resources>

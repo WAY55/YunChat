@@ -1,0 +1,57 @@
+<resources>
+    <!--加载对话框-->
+    <style name="TransparentDialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="LoginTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorPrimary">@color/white</item>
+    </style>
+<!--主页底部导航栏未选中字体效果-->
+    <style name="HomeTagActive">
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <!--主页底部导航栏选中字体效果-->
+    <style name="HomeTagInActive">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+<!--    toolbar-->
+    <style name="toolbarMenu">
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
+    </style>
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+    </style>
+
+<!--    toolbar黑色返回键-->
+
+    <style name="black_toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/black</item>
+    </style>
+
+<!--    弹窗-->
+    <style name="MyDialogStyle" parent="Base.Theme.AppCompat.Light.Dialog">
+        <item name="android:windowAnimationStyle">@style/Base.Animation.AppCompat.Dialog</item>
+        <!--<item name="android:windowFrame">@null</item>-->
+        <!--是否浮在窗口之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--半透明-->
+        <item name="android:windowIsTranslucent">true</item>
+        <!--是否显示title-->
+        <item name="android:windowNoTitle">true</item>
+        <!--dialog之外没有焦点的区域是否罩上黑色半透明-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:width">300dp</item>
+    </style>
+</resources>

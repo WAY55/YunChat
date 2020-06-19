@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.LoginActivity"
+    android:background="@color/white"
+    android:paddingTop="50dp"
+    >
+
+<!--    标题-->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/login_title"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="@dimen/login_title_text"
+        android:typeface="monospace"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+<!--用户名输入区-->
+    <LinearLayout
+        android:id="@+id/username_input_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:weightSum="1"
+        android:gravity="center"
+        >
+
+        <EditText
+            android:digits="0123456789qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+            android:id="@+id/username_text"
+            android:layout_width="0dp"
+            android:layout_weight="0.9"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_username_hint"
+            android:background="@drawable/login_input_username"
+            android:inputType="textNoSuggestions"
+            android:textSize="@dimen/username_input_text"
+            android:padding="15dp"/>
+    </LinearLayout>
+
+<!--    密码输入区-->
+    <LinearLayout
+        android:id="@+id/password_input_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/username_input_area">
+
+        <EditText
+            android:padding="15dp"
+            android:id="@+id/password_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:hint="@string/login_pasword_hint"
+            android:background="@drawable/login_input_password"
+            android:inputType="textPassword"
+            android:textSize="@dimen/password_input_text" />
+    </LinearLayout>
+<!--    登录按钮-->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_input_area">
+
+        <Button
+            android:id="@+id/login_submit_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/input_login_submit"
+            android:text="@string/login_button_submit"
+            android:textColor="@color/button_pink"
+            android:textSize="@dimen/login_button_text" />
+    </LinearLayout>
+
+<!--    忘记密码-->
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:id="@+id/password_forget_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/password_forget"
+            android:textColor="@color/button_pink"
+            android:textSize="@dimen/password_forget_click_text" />
+    </LinearLayout>
+
+<!--    注册-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+            android:id="@+id/login_goto_register_click"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_goto_register"
+            android:textColor="@color/login_link"
+            android:textSize="@dimen/login_goto_register_click_text" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
