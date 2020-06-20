@@ -76,7 +76,8 @@ public class HomeActivity extends AppCompatActivity {
         app = (App) getApplication();
         if (app.getUser() == null) {
             //检查是否存有登录信息
-            User user = LoginUtils.getLoginInfo(this);
+//            User user = LoginUtils.getLoginInfo(this);
+            User user = new User("asdasd", "ChenShuXuChouShabi");
             if (user == null) {
                 //跳转登录界面
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
