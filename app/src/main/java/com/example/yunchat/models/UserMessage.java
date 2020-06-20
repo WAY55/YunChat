@@ -6,7 +6,7 @@ package com.example.yunchat.models;
  */
 public class UserMessage {
     /**用户信息*/
-    private String name;
+    private User user;
     /**信息发送时间*/
     private String time;
     /**信息发送日期*/
@@ -17,19 +17,19 @@ public class UserMessage {
     public UserMessage() {
     }
 
-    public UserMessage(String name, String time, String data, int messageType) {
-        this.name = name;
+    public UserMessage(User user, String time, String data, int messageType) {
+        this.user = user;
         this.time = time;
         this.data = data;
         this.messageType = messageType;
     }
 
-    public String getName() {
-        return name;
+    public User getUser() {
+        return user;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getTime() {
