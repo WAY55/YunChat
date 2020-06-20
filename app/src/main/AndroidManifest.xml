@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".activities.DialogMessageActivity"></activity>
+        <activity android:name=".dialogs.DialogMessage"
+            tools:ignore="Instantiatable"/>
         <activity
             android:name=".activities.LoginActivity"
             android:theme="@style/LoginTheme" />
