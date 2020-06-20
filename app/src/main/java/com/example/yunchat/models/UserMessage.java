@@ -9,18 +9,18 @@ public class UserMessage {
     private User user;
     /**信息发送时间*/
     private String time;
-    /**信息发送日期*/
-    private String data;
+    /**信息发送内容*/
+    private String message;
     /**信息发送类型*/
     private int messageType;
 
     public UserMessage() {
     }
 
-    public UserMessage(User user, String time, String data, int messageType) {
+    public UserMessage(User user, String time, String message, int messageType) {
         this.user = user;
         this.time = time;
-        this.data = data;
+        this.message = message;
         this.messageType = messageType;
     }
 
@@ -39,12 +39,12 @@ public class UserMessage {
         this.time = time;
     }
 
-    public String getData() {
-        return data;
+    public String getMessage() {
+        return message;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData(String message) {
+        this.message = message;
     }
 
     public int getMessageType() {
