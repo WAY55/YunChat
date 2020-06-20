@@ -6,13 +6,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.yunchat.R;
-import com.example.yunchat.activities.HomeActivity;
-import com.example.yunchat.activities.MessageActivity;
 import com.example.yunchat.models.UserMessage;
 import com.example.yunchat.recyclerview.DialogAdapter;
 
@@ -22,6 +22,7 @@ import java.util.List;
 
 public class DialogMessage extends Dialog {
 
+    private Context context;
     private ImageButton backBtn;
     private ImageButton messageBtn;
     private RecyclerView recyclerView;
@@ -33,6 +34,7 @@ public class DialogMessage extends Dialog {
 
     public DialogMessage(@NonNull Context context) {
         super(context);
+        this.context = context;
     }
 
     @Override
@@ -86,7 +88,22 @@ public class DialogMessage extends Dialog {
         editInput = (EditText) findViewById(R.id.dialog_input);
         enterBtn = (ImageButton) findViewById(R.id.dialog_enter);
         list = new ArrayList<>();
-        adapter = new DialogAdapter(this);
+        adapter = new DialogAdapter(context);
+        final Handler handler
     }
 
+    private class MyHandler extends Handler{
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 1){ /*TYPE_LEFT*/
+                /*获取端口号*/
+                int localPort = socket.getLocalPort();
+                String[] data = ((String) msg.obj).split("->");
+                if (data[0].equals(localPort + "")){
+                    UserMessage message = new UserMessage()
+                }
+            }
+        }
+    }
 }
