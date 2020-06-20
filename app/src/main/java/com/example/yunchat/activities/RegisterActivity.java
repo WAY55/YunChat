@@ -156,50 +156,59 @@ public class RegisterActivity extends AppCompatActivity {
                 androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this, R.style.MyDialogStyle);
                 super.handleMessage(msg);
                 int dialogNum = 0;
-                ReturnResult resultHandler = (ReturnResult) msg.obj;
-                dialogNum = resultHandler.getCode();
-                Log.d(TAG, "handleMessage: " + resultHandler);
-                //有数据变化就关闭加载动画
-                if (dialogNum != 0) {
-                    loadingDialog.dismiss();
-                    //注册成功
-                    if (dialogNum == 1) {
-                        //执行弹窗提示
+                switch (msg.what) {
+                    case 1:
+                        ReturnResult resultHandler = (ReturnResult) msg.obj;
+                        dialogNum = resultHandler.getCode();
+                        Log.d(TAG, "handleMessage: " + resultHandler);
+                        //有数据变化就关闭加载动画
+                        if (dialogNum != 0) {
+                            loadingDialog.dismiss();
+                            //注册成功
+                            if (dialogNum == 1) {
+                                //执行弹窗提示
 
-                        builder
-                                .setMessage("恭喜您注册成功")
-                                .setTitle("提示")
-                                .setPositiveButton("确认", (dialog, which) -> {
-                                    //关闭对话框
-                                    dialog.dismiss();
+                                builder
+                                        .setMessage("恭喜您注册成功")
+                                        .setTitle("提示")
+                                        .setPositiveButton("确认", (dialog, which) -> {
+                                            //关闭对话框
+                                            dialog.dismiss();
 
 
-                                    //返回数据到登录界面
-                                    Intent intent = new Intent();
-                                    LoginInfo loginInfo = new LoginInfo(user.getUsername(), user.getPassword());
-                                    intent.putExtra("login_info", loginInfo);
-                                    setResult(RESULT_OK, intent);
-                                    //跳转到登录
-                                    RegisterActivity.this.finish();
-                                    overridePendingTransition(R.anim.close_enter_t, R.anim.close_exit_t);
-                                });
-                        builder.create().show();
-                    }
+                                            //返回数据到登录界面
+                                            Intent intent = new Intent();
+                                            LoginInfo loginInfo = new LoginInfo(user.getUsername(), user.getPassword());
+                                            intent.putExtra("login_info", loginInfo);
+                                            setResult(RESULT_OK, intent);
+                                            //跳转到登录
+                                            RegisterActivity.this.finish();
+                                            overridePendingTransition(R.anim.close_enter_t, R.anim.close_exit_t);
+                                        });
+                                builder.create().show();
+                            }
 
-                    //注册失败
-                    if (dialogNum == -1) {
-                        builder
-                                .setMessage(resultHandler.getInfo().toString())
-                                .setTitle("提示")
-                                .setPositiveButton("确认", (dialog, which) -> {
-                                    //关闭对话框
-                                    dialog.dismiss();
+                            //注册失败
+                            if (dialogNum == -1) {
+                                builder
+                                        .setMessage(resultHandler.getInfo().toString())
+                                        .setTitle("提示")
+                                        .setPositiveButton("确认", (dialog, which) -> {
+                                            //关闭对话框
+                                            dialog.dismiss();
 
-                                });
-                        builder.create().show();
-                    }
-                    dialogNum = 0;
+                                        });
+                                builder.create().show();
+                            }
+                            dialogNum = 0;
+                        }
+                        break;
+                    case -1:
+                        Toast.makeText(RegisterActivity.this, "网路连接失败", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
                 }
+
 
             }
         };
@@ -259,10 +268,16 @@ public class RegisterActivity extends AppCompatActivity {
                 //创建线程池
                 cachedThreadPool = Executors.newCachedThreadPool();
                 cachedThreadPool.execute(() -> {
+                    Message message = handler.obtainMessage();
                     String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(user), REGISTER_URL, RegisterActivity.this);
+                    if ("fail".equals(result)) {
+                        message.what = -1;
+                        handler.sendMessage(message);
+                        return;
+                    }
                     ReturnResult returnResult = JsonUtils.getResult(result);
                     //向主线程传递参数
-                    Message message = handler.obtainMessage();
+                    message.what = 1;
                     message.obj = returnResult;
                     handler.sendMessage(message);
 
@@ -375,7 +390,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        cachedThreadPool.shutdownNow();
         if (loadingDialog != null) {
             loadingDialog.dismiss();
         }

@@ -49,7 +49,7 @@ public class LoginUtils {
      * @param loginInfo 登录信息
      * @param activity 当前活动
      */
-    private static void saveLoginInfo(LoginInfo loginInfo, Activity activity) {
+    public static void saveLoginInfo(LoginInfo loginInfo, Activity activity) {
         SharedPreferences sharedPreferences = activity.getSharedPreferences(SP_INFO, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("username", loginInfo.getUsername());

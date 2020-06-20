@@ -44,7 +44,7 @@ import static com.example.yunchat.utils.LoginUtils.LOGIN_URL;
  *
  * @author 曾健育
  */
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private App app;
     /**
@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity{
      * 登录Handler
      */
     private Handler loginHandle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,7 +122,7 @@ public class LoginActivity extends AppCompatActivity{
                 }
 
                 //进行登录
-                LoginInfo loginInfo = new LoginInfo(usernameText, InfoUtils.md5(passwordText));
+                loginInfo = new LoginInfo(usernameText, InfoUtils.md5(passwordText));
 
                 Log.i(TAG, "onClick: " + loginInfo);
                 tryLogin(loginInfo, cachedThreadPool);
@@ -134,7 +135,7 @@ public class LoginActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivityForResult(intent, 1);
-                overridePendingTransition(R.anim.open_enter_t,R.anim.open_exit_t);
+                overridePendingTransition(R.anim.open_enter_t, R.anim.open_exit_t);
             }
         });
     }
@@ -172,27 +173,36 @@ public class LoginActivity extends AppCompatActivity{
 
     /**
      * 自动填入信息
+     *
      * @param loginInfo 登陆信息
      */
     private void autoInput(LoginInfo loginInfo) {
         if (loginInfo != null) {
             usernameInput.setText(loginInfo.getUsername());
-            passwordInput.setText(loginInfo.getPassword());
         }
     }
 
     private void tryLogin(LoginInfo loginInfo, ExecutorService cachedThreadPool) {
         cachedThreadPool.execute(() -> {
-            String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(loginInfo), LOGIN_URL, LoginActivity.this);
-            ReturnResult returnResult = JsonUtils.getResult(result);
-            //向主线程传递参数
             Message message = loginHandle.obtainMessage();
+            String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(loginInfo), LOGIN_URL, LoginActivity.this);
+            if ("fail".equals(result)) {
+                message.what = -1;
+                loginHandle.sendMessage(message);
+                return;
+            }
+            ReturnResult returnResult = JsonUtils.getResult(result);
+
+            //向主线程传递参数
+
+
             message.obj = returnResult;
             message.what = 1;
             loginHandle.sendMessage(message);
 
         });
     }
+
     class LoginHandler extends Handler {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -201,14 +211,20 @@ public class LoginActivity extends AppCompatActivity{
                 case 1:
                     ReturnResult result = (ReturnResult) msg.obj;
                     if (result.getCode() == 1) {
+                        User user = (User) JsonUtils.jsonToBean(JsonUtils.beanToJson(result), User.class);
+                        app.setUser(user);
                         //登录成功
                         //前往主页面
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        LoginUtils.saveLoginInfo(loginInfo, LoginActivity.this);
                         startActivity(intent);
                         finish();
-                    }else {
-                        Toast.makeText(LoginActivity.this, (String)result.getInfo(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, (String) result.getInfo(), Toast.LENGTH_SHORT).show();
                     }
+                    break;
+                case -1:
+                    Toast.makeText(LoginActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
                     break;
                 default:
             }

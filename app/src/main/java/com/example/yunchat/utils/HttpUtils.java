@@ -60,8 +60,7 @@ public class HttpUtils {
                 result = reader.readLine();
             }
         } catch (Exception e) {
-            Toast.makeText(context, "网络连接失败", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
+            return "fail";
         } finally {
             if (reader != null) {
                 try {
