@@ -22,6 +22,7 @@ import com.example.yunchat.fragments.FriendsFragment;
 import com.example.yunchat.fragments.MessagesFragment;
 import com.example.yunchat.fragments.MyFragment;
 import com.example.yunchat.models.LoginInfo;
+import com.example.yunchat.models.User;
 import com.example.yunchat.utils.LoginUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -75,17 +76,16 @@ public class HomeActivity extends AppCompatActivity {
         app = (App) getApplication();
         if (app.getUser() == null) {
             //检查是否存有登录信息
-            LoginInfo loginInfo = null;
-//            LoginInfo loginInfo = LoginUtils.getLoginInfo(this);
-            if (loginInfo == null) {
+            User user = LoginUtils.getLoginInfo(this);
+            if (user == null) {
                 //跳转登录界面
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 Toast.makeText(app, "检测到未登录，前往登录", Toast.LENGTH_SHORT).show();
-
                 startActivity(intent);
                 finish();
             } else {
-
+                //进行登录
+                app.setUser(user);
             }
         }
 
@@ -109,37 +109,34 @@ public class HomeActivity extends AppCompatActivity {
         //默认显示消息页
         messageInit = showFragment(messageFragment, messageInit);
         //底部导航栏允许自定义颜色
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.home_tag);
+        bottomNavigationView = findViewById(R.id.home_tag);
         bottomNavigationView.setItemIconTintList(null);
 
 
 
         //底部导航栏点击事件
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    //消息页
-                    case R.id.home_tag_messages:
-                        messageInit = showFragment(messageFragment, messageInit);
-                        break;
-                    //通讯录页
-                    case R.id.home_tag_friends:
-                        friendsInit = showFragment(friendsFragment, friendsInit);
-                        break;
-                    //发现页
-                    case R.id.home_tag_find:
-                        findInit = showFragment(findFragment, findInit);
-                        break;
-                    //个人页
-                    case R.id.home_tag_my:
-                        myInit = showFragment(myFragment, myInit);
-                        break;
-                    default:
-                        throw new RuntimeException("不是有效的导航栏页面");
-                }
-                return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                //消息页
+                case R.id.home_tag_messages:
+                    messageInit = showFragment(messageFragment, messageInit);
+                    break;
+                //通讯录页
+                case R.id.home_tag_friends:
+                    friendsInit = showFragment(friendsFragment, friendsInit);
+                    break;
+                //发现页
+                case R.id.home_tag_find:
+                    findInit = showFragment(findFragment, findInit);
+                    break;
+                //个人页
+                case R.id.home_tag_my:
+                    myInit = showFragment(myFragment, myInit);
+                    break;
+                default:
+                    throw new RuntimeException("不是有效的导航栏页面");
             }
+            return true;
         });
 
     }

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -102,41 +103,35 @@ public class LoginActivity extends AppCompatActivity {
         app = (App) getApplication();
 
         //添加登录事件
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cachedThreadPool = Executors.newCachedThreadPool();
-                //获取输入值
-                String usernameText = usernameInput.getText().toString();
-                String passwordText = passwordInput.getText().toString();
+        submitButton.setOnClickListener(v -> {
+            cachedThreadPool = Executors.newCachedThreadPool();
+            //获取输入值
+            String usernameText = usernameInput.getText().toString();
+            String passwordText = passwordInput.getText().toString();
 
-                //检验空值
-                if (usernameText.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, USERNAME_EMPTY, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                if (passwordText.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, PASSWORD_EMPTY, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                //进行登录
-                loginInfo = new LoginInfo(usernameText, InfoUtils.md5(passwordText));
-
-                Log.i(TAG, "onClick: " + loginInfo);
-                tryLogin(loginInfo, cachedThreadPool);
-
+            //检验空值
+            if (usernameText.isEmpty()) {
+                Toast.makeText(LoginActivity.this, USERNAME_EMPTY, Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            if (passwordText.isEmpty()) {
+                Toast.makeText(LoginActivity.this, PASSWORD_EMPTY, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            //进行登录
+            loginInfo = new LoginInfo(usernameText, InfoUtils.md5(passwordText));
+
+            Log.i(TAG, "onClick: " + loginInfo);
+            tryLogin(loginInfo, cachedThreadPool);
+
         });
         //跳转注册
-        gotoRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-                startActivityForResult(intent, 1);
-                overridePendingTransition(R.anim.open_enter_t, R.anim.open_exit_t);
-            }
+        gotoRegister.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivityForResult(intent, 1);
+            overridePendingTransition(R.anim.open_enter_t, R.anim.open_exit_t);
         });
     }
 
@@ -166,6 +161,8 @@ public class LoginActivity extends AppCompatActivity {
                     autoInput(loginInfo);
                 }
                 break;
+            case 2:
+                break;
             default:
 
         }
@@ -191,18 +188,17 @@ public class LoginActivity extends AppCompatActivity {
                 loginHandle.sendMessage(message);
                 return;
             }
-            ReturnResult returnResult = JsonUtils.getResult(result);
 
             //向主线程传递参数
 
-
-            message.obj = returnResult;
+            message.obj = JsonUtils.getResult(result);
             message.what = 1;
             loginHandle.sendMessage(message);
 
         });
     }
 
+    @SuppressLint("HandlerLeak")
     class LoginHandler extends Handler {
         @Override
         public void handleMessage(@NonNull Message msg) {
@@ -216,7 +212,7 @@ public class LoginActivity extends AppCompatActivity {
                         //登录成功
                         //前往主页面
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        LoginUtils.saveLoginInfo(loginInfo, LoginActivity.this);
+                        LoginUtils.saveLoginInfo(user, LoginActivity.this);
                         startActivity(intent);
                         finish();
                     } else {
