@@ -6,4 +6,5 @@
     <dimen name="password_input_text">28sp</dimen>
     <dimen name="username_input_text">28sp</dimen>
     <dimen name="login_title_text">60sp</dimen>
+    <dimen name="dialog_message_input">20sp</dimen>
 </resources>
