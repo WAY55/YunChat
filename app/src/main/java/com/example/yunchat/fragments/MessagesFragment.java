@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,23 +19,35 @@ import androidx.fragment.app.Fragment;
 
 import com.example.yunchat.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * 用于显示消息页
  *
  * @author 曾健育
  */
 public class MessagesFragment extends Fragment {
+
+    @BindView(R.id.shabichenshuxu)
+    Button button;
+    Unbinder unbinder;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.messages_fragment, container, false);
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         //ToolBar菜单
-
+        unbinder = ButterKnife.bind(this, view);
         //获取ToolBar
         Toolbar toolbar = activity.findViewById(R.id.message_toolbar);
         activity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
+
+        button.setOnClickListener(v -> {
+
+        });
         return view;
 
 
@@ -51,5 +64,12 @@ public class MessagesFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+
     }
 }
