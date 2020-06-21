@@ -1,5 +1,7 @@
 package com.example.yunchat.fragments;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -7,6 +9,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
@@ -18,6 +21,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.yunchat.R;
+import com.example.yunchat.activities.HomeActivity;
+import com.example.yunchat.dialogs.DialogMessage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +51,12 @@ public class MessagesFragment extends Fragment {
         setHasOptionsMenu(true);
 
         button.setOnClickListener(v -> {
-
+            DialogMessage dialog = new DialogMessage();
+            dialog.show();
+            Window window = dialog.getWindow();
+            //通过window去掉对话框的默认背景
+            assert window != null;
+            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         });
         return view;
 
