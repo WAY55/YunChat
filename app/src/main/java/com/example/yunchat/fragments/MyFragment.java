@@ -1,6 +1,8 @@
 package com.example.yunchat.fragments;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,5 +39,19 @@ public class MyFragment extends Fragment {
         super.onDestroyView();
         unbinder.unbind();
 
+    }
+
+    static class MyHandler extends Handler{
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                default:
+            }
+        }
     }
 }

@@ -1,11 +1,14 @@
 package com.example.yunchat.utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -178,5 +181,33 @@ public class HttpUtils {
         return result.toString();
     }
 
+    /**
+     * 加载网络图片
+     * @param url 网络url
+     * @return 图片字节
+     */
+    public Bitmap getUrlImage(String url) {
+        Bitmap bmp = null;
+        try {
+            URL myurl = new URL(url);
+            // 获得连接
+            HttpURLConnection conn = (HttpURLConnection) myurl.openConnection();
+            //设置超时
+            conn.setConnectTimeout(6000);
+            conn.setDoInput(true);
+            //不缓存
+            conn.setUseCaches(false);
+            conn.connect();
+            //获得图片的数据流
+            InputStream is = conn.getInputStream();
+            //读取图像数据
+            bmp = BitmapFactory.decodeStream(is);
+
+            is.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bmp;
+    }
 
 }
