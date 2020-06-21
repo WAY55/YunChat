@@ -35,11 +35,13 @@ public class LoginUtils {
         SharedPreferences sharedPreferences = activity.getSharedPreferences(SP_INFO, Context.MODE_PRIVATE);
         //获取用户
         String userJson = sharedPreferences.getString("user", null);
+        System.out.println("AAA" + userJson );
 
-        if (userJson == null) {
+        User user = (User) JsonUtils.jsonToBean(userJson, User.class);
+        if (user.getOpenId() == null) {
             return null;
         } else {
-            return (User)JsonUtils.jsonToBean(userJson, User.class);
+            return user;
         }
     }
 
@@ -53,6 +55,7 @@ public class LoginUtils {
         SharedPreferences sharedPreferences = activity.getSharedPreferences(SP_INFO, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("user", JsonUtils.beanToJson(user));
+        System.out.println("write: " + user);
         editor.apply();
 
     }

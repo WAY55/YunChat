@@ -207,12 +207,11 @@ public class LoginActivity extends AppCompatActivity {
                 case 1:
                     ReturnResult result = (ReturnResult) msg.obj;
                     if (result.getCode() == 1) {
-                        User user = (User) JsonUtils.jsonToBean(JsonUtils.beanToJson(result), User.class);
-                        app.setUser(user);
+                        User user = (User) JsonUtils.jsonToBean(JsonUtils.beanToJson(result.getInfo()), User.class);
+                        LoginUtils.saveLoginInfo(user, LoginActivity.this);
                         //登录成功
                         //前往主页面
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        LoginUtils.saveLoginInfo(user, LoginActivity.this);
                         startActivity(intent);
                         finish();
                     } else {
