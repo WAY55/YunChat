@@ -14,6 +14,10 @@ import com.example.yunchat.models.UserMessage;
 
 import java.util.ArrayList;
 
+/**
+ * 对话框适配器
+ * @author 陈树旭
+ */
 public class DialogAdapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<UserMessage> messages;

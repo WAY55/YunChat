@@ -24,6 +24,7 @@ import com.example.yunchat.fragments.MessagesFragment;
 import com.example.yunchat.fragments.MyFragment;
 import com.example.yunchat.models.LoginInfo;
 import com.example.yunchat.models.User;
+import com.example.yunchat.server.DialogMessageManager;
 import com.example.yunchat.utils.LoginUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -74,6 +75,8 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //启动对话框内的服务
+        DialogMessageManager.startServer();
 
         if (user == null) {
             //检查是否存有登录信息
