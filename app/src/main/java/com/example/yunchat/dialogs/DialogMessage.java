@@ -20,6 +20,7 @@ import java.util.List;
 
 public class DialogMessage extends Dialog {
 
+    private Context context;
     private ImageButton backBtn;
     private ImageButton messageBtn;
     private RecyclerView recyclerView;
@@ -31,6 +32,7 @@ public class DialogMessage extends Dialog {
 
     public DialogMessage(@NonNull Context context) {
         super(context);
+        this.context = context;
     }
 
     @Override
@@ -84,7 +86,7 @@ public class DialogMessage extends Dialog {
         editInput = (EditText) findViewById(R.id.dialog_input);
         enterBtn = (ImageButton) findViewById(R.id.dialog_enter);
         list = new ArrayList<>();
-//        adapter = new DialogAdapter(this);
+        adapter = new DialogAdapter(context);
     }
 
 }

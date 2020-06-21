@@ -32,7 +32,7 @@ public class DialogMessageManager {
         @Override
         public void run() {
             try {
-                while (exit){
+                while (!exit){
                     //等待获取手机连接
                     System.out.println("等待手机连接......");
                     final Socket socket = serverSocket.accept();
