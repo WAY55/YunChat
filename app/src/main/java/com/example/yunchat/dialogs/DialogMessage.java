@@ -86,7 +86,7 @@ public class DialogMessage extends Dialog {
         editInput = (EditText) findViewById(R.id.dialog_input);
         enterBtn = (ImageButton) findViewById(R.id.dialog_enter);
         list = new ArrayList<>();
-        adapter = new DialogAdapter(this);
+//        adapter = new DialogAdapter(this);
     }
 
 }
