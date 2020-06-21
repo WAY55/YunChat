@@ -51,7 +51,7 @@ public class MessagesFragment extends Fragment {
         setHasOptionsMenu(true);
 
         button.setOnClickListener(v -> {
-            DialogMessage dialog = new DialogMessage();
+            DialogMessage dialog = new DialogMessage( );
             dialog.show();
             Window window = dialog.getWindow();
             //通过window去掉对话框的默认背景
