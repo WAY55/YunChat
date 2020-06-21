@@ -25,4 +25,5 @@
     <string name="my_title">我的</string>
     <string name="my_avatar">我的头像</string>
     <string name="username_label">用户名：</string>
+    <string name="my_sex">性别：</string>
 </resources>

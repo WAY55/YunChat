@@ -48,6 +48,8 @@ public class MyFragment extends Fragment {
     /**用户名*/
     @BindView(R.id.my_username)
     TextView myUsername;
+    /**性别*/
+    MyHandler myHandler;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,23 +60,11 @@ public class MyFragment extends Fragment {
         user = LoginUtils.getLoginInfo(activity);
         activity.setSupportActionBar(toolbar);
         //初始化handler
-        MyHandler myHandler = new MyHandler();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String url = "http://" + IpConfig.getAddress() + "/avatar/" + user.getAvatar();
-                Bitmap bitmap = HttpUtils.getUrlImage(url);
-                Message message = myHandler.obtainMessage();
-                message.what = 1;
-                message.obj = bitmap;
-                myHandler.sendMessage(message);
-            }
-        }).start();
+         myHandler = new MyHandler();
 
         //获取头像
+        initAvatar();
 
-        //设置圆形头像
-//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
 
         //设置用户名
         myUsername.setText(user.getUsername());
@@ -95,12 +85,23 @@ public class MyFragment extends Fragment {
             switch (msg.what) {
                 case 1:
                     Bitmap bitmap = (Bitmap) msg.obj;
-                    imageView.setImageBitmap(BitmapUtils.ClipSquareBitmap(bitmap, 200, bitmap.getHeight()));
+                    imageView.setImageBitmap(bitmap);
                     break;
                 case 2:
                     break;
                 default:
             }
         }
+    }
+
+    private void initAvatar() {
+        new Thread(() -> {
+            String url = "http://" + IpConfig.getAddress() + "/avatar/" + user.getAvatar();
+            Bitmap bitmap = HttpUtils.getUrlImage(url);
+            Message message = myHandler.obtainMessage();
+            message.what = 1;
+            message.obj = bitmap;
+            myHandler.sendMessage(message);
+        }).start();
     }
 }

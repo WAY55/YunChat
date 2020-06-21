@@ -23,5 +23,6 @@
     <string name="sex_female">female</string>
     <string name="my_title">My Information</string>
     <string name="my_avatar">My Avatar</string>
-    <string name="username_label">username:</string>
+    <string name="username_label">Username:</string>
+    <string name="my_sex">Sex:</string>
 </resources>
