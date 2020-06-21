@@ -51,6 +51,8 @@ public class DialogMessage extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //设置点击屏幕对话框不消失
+        this.setCanceledOnTouchOutside(false);
         //引入布局文件
         setContentView(R.layout.dialog_message);
         //初始化组件
