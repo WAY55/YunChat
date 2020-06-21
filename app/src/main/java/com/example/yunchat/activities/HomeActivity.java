@@ -3,6 +3,7 @@ package com.example.yunchat.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
  * @author 曾健育
  */
 public class HomeActivity extends AppCompatActivity {
+    private static final String TAG = "HomeActivity";
     /**
      * 两次按下返回键的时间范围
      */
@@ -68,25 +70,20 @@ public class HomeActivity extends AppCompatActivity {
      */
     BottomNavigationView bottomNavigationView;
 
+    private User user;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //获取app对象
-        app = (App) getApplication();
-        if (app.getUser() == null) {
+        if (user == null) {
             //检查是否存有登录信息
-//            User user = LoginUtils.getLoginInfo(this);
-            User user = new User("asdasd", "ChenShuXuChouShabi");
+            User user = LoginUtils.getLoginInfo(this);
             if (user == null) {
                 //跳转登录界面
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 Toast.makeText(app, "检测到未登录，前往登录", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
-            } else {
-                //进行登录
-                app.setUser(user);
             }
         }
 
