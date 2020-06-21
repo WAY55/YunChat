@@ -35,10 +35,12 @@ public class LoginUtils {
         SharedPreferences sharedPreferences = activity.getSharedPreferences(SP_INFO, Context.MODE_PRIVATE);
         //获取用户
         String userJson = sharedPreferences.getString("user", null);
-        System.out.println("AAA" + userJson );
+        if ("null".equals(userJson)) {
+            return null;
+        }
 
         User user = (User) JsonUtils.jsonToBean(userJson, User.class);
-        if (user.getOpenId() == null) {
+        if (user.getOpenId() == null || user.getOpenId().isEmpty()) {
             return null;
         } else {
             return user;

@@ -186,7 +186,7 @@ public class HttpUtils {
      * @param url 网络url
      * @return 图片字节
      */
-    public Bitmap getUrlImage(String url) {
+    public static Bitmap getUrlImage(String url) {
         Bitmap bmp = null;
         try {
             URL myurl = new URL(url);
