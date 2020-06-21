@@ -105,5 +105,5 @@ public class DialogMessageManager {
         }
         serverThread.Stop();
         map.clear();
-    }asd a
+    }
 }
