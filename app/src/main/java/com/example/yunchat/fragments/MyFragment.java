@@ -49,6 +49,8 @@ public class MyFragment extends Fragment {
     @BindView(R.id.my_username)
     TextView myUsername;
     /**性别*/
+    @BindView(R.id.my_sex)
+    TextView mySex;
     MyHandler myHandler;
     @Nullable
     @Override
@@ -61,14 +63,26 @@ public class MyFragment extends Fragment {
         activity.setSupportActionBar(toolbar);
         //初始化handler
          myHandler = new MyHandler();
-
         //获取头像
         initAvatar();
-
+        //初始化性别
+        initSex();
 
         //设置用户名
         myUsername.setText(user.getUsername());
         return view;
+    }
+
+    private void initSex() {
+        switch (user.getSex()) {
+            case 0:
+                mySex.setText(R.string.sex_male);
+                break;
+            case 1:
+                mySex.setText(R.string.sex_female);
+                break;
+            default:
+        }
     }
 
     @Override
