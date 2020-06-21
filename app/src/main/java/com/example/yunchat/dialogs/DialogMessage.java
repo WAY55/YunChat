@@ -11,8 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.example.yunchat.R;
-import com.example.yunchat.activities.HomeActivity;
-import com.example.yunchat.activities.MessageActivity;
 import com.example.yunchat.models.UserMessage;
 import com.example.yunchat.recyclerview.DialogAdapter;
 
