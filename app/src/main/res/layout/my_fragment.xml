@@ -34,11 +34,22 @@
         android:background="@color/white"
         >
 
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="7" />
+            android:gravity="right|center"
+            android:layout_weight="3"
+            android:text="@string/username_label"
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/my_username"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:gravity="left|center"
+            android:textColor="@color/black"
+            android:textSize="30sp"/>
         <ImageView
             android:id="@+id/my_avatar"
             android:src="@mipmap/ic_launcher"
@@ -46,7 +57,8 @@
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_weight="3"
-            />
+            android:contentDescription="@string/my_avatar" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

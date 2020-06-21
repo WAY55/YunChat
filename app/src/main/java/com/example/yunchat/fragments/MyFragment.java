@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +20,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.yunchat.App;
 import com.example.yunchat.R;
+import com.example.yunchat.configs.IpConfig;
 import com.example.yunchat.models.User;
 import com.example.yunchat.utils.BitmapUtils;
+import com.example.yunchat.utils.HttpUtils;
 import com.example.yunchat.utils.LoginUtils;
 
 import butterknife.BindView;
@@ -42,6 +45,9 @@ public class MyFragment extends Fragment {
     /**头像*/
     @BindView(R.id.my_avatar)
     ImageView imageView;
+    /**用户名*/
+    @BindView(R.id.my_username)
+    TextView myUsername;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,9 +57,27 @@ public class MyFragment extends Fragment {
         assert activity != null;
         user = LoginUtils.getLoginInfo(activity);
         activity.setSupportActionBar(toolbar);
+        //初始化handler
+        MyHandler myHandler = new MyHandler();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url = "http://" + IpConfig.getAddress() + "/avatar/" + user.getAvatar();
+                Bitmap bitmap = HttpUtils.getUrlImage(url);
+                Message message = myHandler.obtainMessage();
+                message.what = 1;
+                message.obj = bitmap;
+                myHandler.sendMessage(message);
+            }
+        }).start();
+
+        //获取头像
+
         //设置圆形头像
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-        imageView.setImageBitmap(BitmapUtils.ClipSquareBitmap(bitmap, 200, bitmap.getHeight()));
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+
+        //设置用户名
+        myUsername.setText(user.getUsername());
         return view;
     }
 
@@ -64,12 +88,14 @@ public class MyFragment extends Fragment {
 
     }
 
-    static class MyHandler extends Handler{
+     class MyHandler extends Handler{
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
+                    Bitmap bitmap = (Bitmap) msg.obj;
+                    imageView.setImageBitmap(BitmapUtils.ClipSquareBitmap(bitmap, 200, bitmap.getHeight()));
                     break;
                 case 2:
                     break;

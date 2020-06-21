@@ -23,4 +23,6 @@
     <string name="sex_male">男</string>
     <string name="sex_female">女</string>
     <string name="my_title">我的</string>
+    <string name="my_avatar">我的头像</string>
+    <string name="username_label">用户名：</string>
 </resources>
