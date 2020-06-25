@@ -19,7 +19,7 @@ public class LoginUtils {
     /**
      * 登录验证的URL地址
      */
-    public final static String LOGIN_URL = "http://"+ IpConfig.getAddress() +"/yunchat/user/login.do";
+    public final static String LOGIN_URL = "http://"+ IpConfig.getAddress() +"/user/login.do";
     /**
      * 存储的key
      */

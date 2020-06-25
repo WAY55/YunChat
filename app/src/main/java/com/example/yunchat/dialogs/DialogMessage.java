@@ -62,7 +62,7 @@ public class DialogMessage extends Dialog {
         final Handler handler = new MyHandler();
         new Thread(()->{
             try {
-                socket = new Socket("192.168.0.113", 11111);
+                socket = new Socket("192.168.186.101", 11111);
                 InputStream is = socket.getInputStream();
                 byte[] b = new byte[1024];
                 int length;
@@ -112,7 +112,6 @@ public class DialogMessage extends Dialog {
                                         StandardCharsets.UTF_8));
                         //清空
                         os.flush();
-                        editInput.setText("");
                     }catch (IOException e){
                         e.printStackTrace();
                     }

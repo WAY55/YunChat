@@ -25,4 +25,8 @@
     <string name="my_avatar">My Avatar</string>
     <string name="username_label">Username:</string>
     <string name="my_sex">Sex:</string>
+    <string name="my_email">Email:</string>
+    <string name="my_birthday">Birthday:</string>
+    <string name="my_address">Address:</string>
+    <string name="logout">Logout</string>
 </resources>

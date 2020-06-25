@@ -1,5 +1,6 @@
 package com.example.yunchat.fragments;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.yunchat.App;
 import com.example.yunchat.R;
+import com.example.yunchat.activities.HomeActivity;
+import com.example.yunchat.activities.LoginActivity;
 import com.example.yunchat.configs.IpConfig;
 import com.example.yunchat.models.User;
 import com.example.yunchat.utils.BitmapUtils;
@@ -51,6 +55,17 @@ public class MyFragment extends Fragment {
     /**性别*/
     @BindView(R.id.my_sex)
     TextView mySex;
+    /**邮箱*/
+    @BindView(R.id.my_email)
+    TextView myEmail;
+    /**生日*/
+    @BindView(R.id.my_birthday)
+    TextView myBirthday;
+    /**地址*/
+    @BindView(R.id.my_address)
+    TextView myAddress;
+    @BindView(R.id.logout_pressed_area)
+    LinearLayout logout;
     MyHandler myHandler;
     @Nullable
     @Override
@@ -67,10 +82,42 @@ public class MyFragment extends Fragment {
         initAvatar();
         //初始化性别
         initSex();
-
-        //设置用户名
-        myUsername.setText(user.getUsername());
+        //初始化邮箱
+        initEmail();
+        //初始化用户名
+        initUserName();
+        //初始化生日
+        initBirthday();
+        //初始化地址
+        initAddress();
+        //添加注销时间
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoginUtils.saveLoginInfo(null, activity);
+                //转至登录页面
+                Intent intent = new Intent(activity, LoginActivity.class);
+                startActivity(intent);
+                activity.finish();
+            }
+        });
         return view;
+    }
+
+    private void initAddress() {
+        myAddress.setText(user.getAddress());
+    }
+
+    private void initBirthday() {
+        myBirthday.setText(user.getBirthday());
+    }
+
+    private void initUserName() {
+        myUsername.setText(user.getUsername());
+    }
+
+    private void initEmail() {
+        myEmail.setText(user.getEmail());
     }
 
     private void initSex() {

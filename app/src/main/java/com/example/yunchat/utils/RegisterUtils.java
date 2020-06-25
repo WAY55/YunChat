@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
  * @author 曾健育
  */
 public class RegisterUtils {
-    public static final String REGISTER_URL = "http://" + IpConfig.getAddress() + "/yunchat/user/register.do";
+    public static final String REGISTER_URL = "http://" + IpConfig.getAddress() + "/user/register.do";
 
 
 }

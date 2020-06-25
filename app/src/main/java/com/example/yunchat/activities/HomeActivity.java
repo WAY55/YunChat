@@ -81,10 +81,11 @@ public class HomeActivity extends AppCompatActivity {
         if (user == null) {
             //检查是否存有登录信息
             User user = LoginUtils.getLoginInfo(this);
+            Log.d(TAG, "onCreate: " + user);
             if (user == null) {
                 //跳转登录界面
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                Toast.makeText(app, "检测到未登录，前往登录", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, "检测到未登录，前往登录", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
             }
