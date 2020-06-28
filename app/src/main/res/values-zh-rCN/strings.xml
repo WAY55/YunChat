@@ -31,4 +31,6 @@
     <string name="my_address">地址：</string>
     <string name="logout">注销</string>
     <string name="mail_list">通讯录</string>
+    <string name="add_friend_username">请输入好友用户名</string>
+    <string name="search">搜索</string>
 </resources>

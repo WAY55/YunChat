@@ -90,7 +90,7 @@ public class MyFragment extends Fragment {
         initBirthday();
         //初始化地址
         initAddress();
-        //添加注销时间
+        //添加注销事件
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -7,4 +7,6 @@
     <dimen name="username_input_text">28sp</dimen>
     <dimen name="login_title_text">60sp</dimen>
     <dimen name="dialog_message_input">20sp</dimen>
+    <dimen name="normal_text_big">20sp</dimen>
+    <dimen name="normal_text_middle">15sp</dimen>
 </resources>

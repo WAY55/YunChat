@@ -29,7 +29,7 @@ public class HttpUtils {
     private static final int RESULT_OK = 200;
 
 
-    public static String sendJsonPost(String json, String urlPath, Context context) {
+    public static String sendJsonPost(String json, String urlPath) {
         // HttpClient 6.0被抛弃了
         String result = "";
         BufferedReader reader = null;

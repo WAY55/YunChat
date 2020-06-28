@@ -269,7 +269,7 @@ public class RegisterActivity extends AppCompatActivity {
                 cachedThreadPool = Executors.newCachedThreadPool();
                 cachedThreadPool.execute(() -> {
                     Message message = handler.obtainMessage();
-                    String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(user), REGISTER_URL, RegisterActivity.this);
+                    String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(user), REGISTER_URL);
                     if ("fail".equals(result)) {
                         message.what = -1;
                         handler.sendMessage(message);

@@ -30,4 +30,6 @@
     <string name="my_address">Address:</string>
     <string name="logout">Logout</string>
     <string name="mail_list">MailList</string>
+    <string name="add_friend_username">Please enter your friend\'s username</string>
+    <string name="search">Search</string>
 </resources>

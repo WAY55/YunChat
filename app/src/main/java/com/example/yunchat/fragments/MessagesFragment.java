@@ -1,5 +1,6 @@
 package com.example.yunchat.fragments;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.yunchat.R;
 import com.example.yunchat.activities.HomeActivity;
+import com.example.yunchat.activities.SearchFriendActivity;
 import com.example.yunchat.dialogs.DialogMessage;
 
 import butterknife.BindView;
@@ -87,7 +89,9 @@ public class MessagesFragment extends Fragment implements Toolbar.OnMenuItemClic
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_friend:
-                Toast.makeText(getActivity(), "添加朋友", Toast.LENGTH_SHORT).show();
+                //转至搜索好友界面
+                Intent intent = new Intent(getActivity(), SearchFriendActivity.class);
+                startActivityForResult(intent, 2);
                 break;
             default:
         }

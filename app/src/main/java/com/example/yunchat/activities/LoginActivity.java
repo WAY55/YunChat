@@ -182,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
     private void tryLogin(LoginInfo loginInfo, ExecutorService cachedThreadPool) {
         cachedThreadPool.execute(() -> {
             Message message = loginHandle.obtainMessage();
-            String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(loginInfo), LOGIN_URL, LoginActivity.this);
+            String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(loginInfo), LOGIN_URL);
             if ("fail".equals(result)) {
                 message.what = -1;
                 loginHandle.sendMessage(message);

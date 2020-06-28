@@ -12,4 +12,6 @@ public class IpConfig {
     public static String getAddress() {
         return IP + ":" + PORT + "/yunchat";
     }
+
+    public static final String SEARCH_FRIEND = "http://"  + getAddress() + "/friend/search";
 }
