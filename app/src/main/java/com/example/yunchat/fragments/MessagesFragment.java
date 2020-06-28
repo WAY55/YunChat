@@ -3,6 +3,7 @@ package com.example.yunchat.fragments;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,8 +35,9 @@ import butterknife.Unbinder;
  *
  * @author 曾健育
  */
-public class MessagesFragment extends Fragment {
+public class MessagesFragment extends Fragment implements Toolbar.OnMenuItemClickListener {
 
+    private static final String TAG = "MessagesFragment";
     @BindView(R.id.shabichenshuxu)
     Button button;
     Unbinder unbinder;
@@ -42,14 +45,15 @@ public class MessagesFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.messages_fragment, container, false);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
-        //ToolBar菜单
-        unbinder = ButterKnife.bind(this, view);
-        //获取ToolBar
-        Toolbar toolbar = activity.findViewById(R.id.message_toolbar);
-        activity.setSupportActionBar(toolbar);
-        setHasOptionsMenu(true);
+        AppCompatActivity activity = (HomeActivity) getActivity();
 
+        //获取ToolBar;
+        Toolbar toolbar = view.findViewById(R.id.message_toolbar);
+        //ToolBar菜单
+        toolbar.inflateMenu(R.menu.messages_more_menu);
+        //添加菜单事件
+        toolbar.setOnMenuItemClickListener(this);
+        unbinder = ButterKnife.bind(this, view);
         button.setOnClickListener(v -> {
             DialogMessage dialog = new DialogMessage(getContext(),activity);
             dialog.show();
@@ -63,23 +67,30 @@ public class MessagesFragment extends Fragment {
 
     }
 
-
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.messages_more_menu, menu);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
-        super.onCreateOptionsMenu(menu, inflater);
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
 
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_friend:
+                Toast.makeText(getActivity(), "添加朋友", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+        }
+        return false;
     }
 }

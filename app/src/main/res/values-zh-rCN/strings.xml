@@ -30,4 +30,5 @@
     <string name="my_birthday">生日：</string>
     <string name="my_address">地址：</string>
     <string name="logout">注销</string>
+    <string name="mail_list">通讯录</string>
 </resources>

@@ -77,7 +77,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //启动对话框内的服务
         DialogMessageManager.startServer();
-
         if (user == null) {
             //检查是否存有登录信息
             User user = LoginUtils.getLoginInfo(this);
@@ -102,6 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         findFragment = new FindFragment();
         myFragment = new MyFragment();
 
+        messageFragment.setHasOptionsMenu(true);
         //是否需要初始化
         messageInit = true;
         friendsInit = true;

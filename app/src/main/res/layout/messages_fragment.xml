@@ -23,7 +23,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:menu="@menu/messages_more_menu"
             app:popupTheme="@style/toolbarMenu"
             app:title="@string/app_name">
 

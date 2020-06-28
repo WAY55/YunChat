@@ -29,4 +29,5 @@
     <string name="my_birthday">Birthday:</string>
     <string name="my_address">Address:</string>
     <string name="logout">Logout</string>
+    <string name="mail_list">MailList</string>
 </resources>
