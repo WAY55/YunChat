@@ -35,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.example.yunchat.configs.StringConfig.EXIT_APP;
+import static com.example.yunchat.configs.StringConfig.NETWORK_CONNECTION_FAILED;
 import static com.example.yunchat.configs.StringConfig.PASSWORD_EMPTY;
 import static com.example.yunchat.configs.StringConfig.USERNAME_EMPTY;
 import static com.example.yunchat.utils.LoginUtils.LOGIN_URL;
@@ -87,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * 登录Handler
      */
-    private Handler loginHandle;
+    private LoginHandler loginHandle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,7 +220,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     break;
                 case -1:
-                    Toast.makeText(LoginActivity.this, "网络连接错误", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, NETWORK_CONNECTION_FAILED, Toast.LENGTH_SHORT).show();
                     break;
                 default:
             }

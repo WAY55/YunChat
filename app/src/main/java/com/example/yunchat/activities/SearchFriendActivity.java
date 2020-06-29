@@ -4,23 +4,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.yunchat.R;
 import com.example.yunchat.configs.IpConfig;
+import com.example.yunchat.configs.StringConfig;
 import com.example.yunchat.handlers.SearchFriendHandler;
+import com.example.yunchat.models.ReturnResult;
 import com.example.yunchat.models.SearchInfo;
+import com.example.yunchat.models.User;
 import com.example.yunchat.utils.HttpUtils;
 import com.example.yunchat.utils.JsonUtils;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.yunchat.configs.StringConfig.NETWORK_CONNECTION_FAILED;
 
 /**
  * 搜索好友
@@ -65,10 +73,16 @@ public class SearchFriendActivity extends AppCompatActivity {
     }
 
     private void trySearch(SearchInfo info) {
-
+        Message message = handler.obtainMessage();
         cachedThreadPool.execute(() -> {
             String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(info), IpConfig.SEARCH_FRIEND);
-            Log.d(TAG, "trySearch: " + result);
+            if ("fail".equals(result)) {
+                Toast.makeText(this, NETWORK_CONNECTION_FAILED, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            message.what = 1;
+            message.obj = JsonUtils.getResult(result);
+            handler.sendMessage(message);
         });
 
     }

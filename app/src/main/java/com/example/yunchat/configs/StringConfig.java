@@ -25,4 +25,6 @@ public class StringConfig {
     public static final String EMAIL_FORMAT_ERROR = "邮箱格式不正确";
 
     public static final String EXIT_APP = "再按一次退出程序";
+
+    public static final String NETWORK_CONNECTION_FAILED = "网络连接中断";
 }
