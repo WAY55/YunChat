@@ -35,7 +35,7 @@ public class LoginUtils {
         SharedPreferences sharedPreferences = activity.getSharedPreferences(SP_INFO, Context.MODE_PRIVATE);
         //获取用户
         String userJson = sharedPreferences.getString("user", null);
-        if ("null".equals(userJson)) {
+        if ("null".equals(userJson) || userJson == null) {
             return null;
         }
 

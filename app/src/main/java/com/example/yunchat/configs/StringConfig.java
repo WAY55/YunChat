@@ -27,4 +27,5 @@ public class StringConfig {
     public static final String EXIT_APP = "再按一次退出程序";
 
     public static final String NETWORK_CONNECTION_FAILED = "网络连接中断";
+    public static final String NEVER_LOGIN = "检测到未登录，请前往登录";
 }

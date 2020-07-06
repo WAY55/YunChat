@@ -1,14 +1,10 @@
 package com.example.yunchat.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,15 +14,19 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.yunchat.App;
 import com.example.yunchat.R;
+import com.example.yunchat.configs.IpConfig;
 import com.example.yunchat.fragments.FindFragment;
 import com.example.yunchat.fragments.FriendsFragment;
 import com.example.yunchat.fragments.MessagesFragment;
 import com.example.yunchat.fragments.MyFragment;
-import com.example.yunchat.models.LoginInfo;
 import com.example.yunchat.models.User;
-import com.example.yunchat.server.DialogMessageManager;
+import com.example.yunchat.server.JWebSocketClient;
 import com.example.yunchat.utils.LoginUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.net.URI;
+
+import static com.example.yunchat.configs.StringConfig.NEVER_LOGIN;
 
 /**
  * 首页
@@ -49,7 +49,6 @@ public class HomeActivity extends AppCompatActivity {
     App app;
 
 
-
     /**
      * 四个对应的内容页面
      */
@@ -70,28 +69,36 @@ public class HomeActivity extends AppCompatActivity {
      * 底部导航栏
      */
     BottomNavigationView bottomNavigationView;
-
+    public static JWebSocketClient client;
     private User user;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //启动对话框内的服务
-        DialogMessageManager.startServer();
+//        DialogMessageManager.startServer();
+        //检测是否登录
         if (user == null) {
             //检查是否存有登录信息
-            User user = LoginUtils.getLoginInfo(this);
+            user = LoginUtils.getLoginInfo(this);
             Log.d(TAG, "onCreate: " + user);
             if (user == null) {
                 //跳转登录界面
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                Toast.makeText(HomeActivity.this, "检测到未登录，前往登录", Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivity.this, NEVER_LOGIN, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
             }
         }
-
-        //检测是否登录
-
+        //启用WebSocket
+        URI uri = URI.create("ws://" + IpConfig.getAddress() + "/connection/" + user.getOpenId());
+        client = new JWebSocketClient(uri);
+        try {
+            client.connectBlocking();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        client.send("111");
         setContentView(R.layout.activity_home);
 
 
@@ -113,7 +120,6 @@ public class HomeActivity extends AppCompatActivity {
         //底部导航栏允许自定义颜色
         bottomNavigationView = findViewById(R.id.home_tag);
         bottomNavigationView.setItemIconTintList(null);
-
 
 
         //底部导航栏点击事件
@@ -160,9 +166,10 @@ public class HomeActivity extends AppCompatActivity {
 
     /**
      * 隐藏fragment
+     *
      * @param fragments 需要隐藏的fragment
      */
-    private void hideFragment(FragmentTransaction transaction,Fragment... fragments) {
+    private void hideFragment(FragmentTransaction transaction, Fragment... fragments) {
         if (transaction == null) {
             transaction = fragmentManager.beginTransaction();
         }
@@ -174,6 +181,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+
     /**
      * 隐藏所有fragment
      */
@@ -183,8 +191,9 @@ public class HomeActivity extends AppCompatActivity {
 
     /**
      * 显示fragment
+     *
      * @param fragment 需要显示的fragment
-     * @param init 是否需要初始化
+     * @param init     是否需要初始化
      * @return false
      */
     private boolean showFragment(Fragment fragment, boolean init) {

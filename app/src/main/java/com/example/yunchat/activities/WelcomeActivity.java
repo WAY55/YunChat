@@ -33,13 +33,10 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //定时跳转
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        handler.postDelayed(() -> {
+            Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
         }, WELCOME_LENGTH);
 
     }

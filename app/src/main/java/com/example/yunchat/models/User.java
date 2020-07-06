@@ -42,9 +42,11 @@ public class User implements Serializable {
     /**地址*/
     private String address;
 
-    public User(String openId, String username) {
-        this.openId = openId;
-        this.username = username;
+    public String getOpenId() {
+        return openId;
     }
 
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
 }
