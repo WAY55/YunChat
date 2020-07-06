@@ -32,4 +32,5 @@
     <string name="mail_list">MailList</string>
     <string name="add_friend_username">Please enter your friend\'s username</string>
     <string name="search">Search</string>
+    <string name="add_friend">Add Friend</string>
 </resources>

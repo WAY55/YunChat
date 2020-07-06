@@ -96,9 +96,10 @@ public class SearchFriendActivity extends AppCompatActivity {
         listView.setOnItemClickListener((parent, view, position, id) -> {
             UserAdapter adapter = (UserAdapter) parent.getAdapter();
             User user = (User) adapter.getItem(position);
-//                Intent intent = new Intent(SearchFriendActivity.this, AddFriendActivity.class);
-//                intent.putExtra("user", user);
-//                startActivityForResult(intent, 2);
+            Intent intent = new Intent(SearchFriendActivity.this, AddFriendActivity.class);
+            intent.putExtra("user", user);
+            startActivityForResult(intent, 2);
+            overridePendingTransition(R.anim.open_enter_t, R.anim.open_exit_t);
         });
     }
 
@@ -116,14 +117,17 @@ public class SearchFriendActivity extends AppCompatActivity {
         });
 
     }
+
     /**
      * 搜索好友Handler
+     *
      * @author 曾健育
      */
-     class SearchFriendHandler extends Handler {
+    class SearchFriendHandler extends Handler {
 
         private static final String TAG = "SearchFriendHandler";
         private Activity activity;
+
         public SearchFriendHandler(Activity activity) {
             this.activity = activity;
         }
@@ -135,12 +139,13 @@ public class SearchFriendActivity extends AppCompatActivity {
                 case 1:
                     ReturnResult result = (ReturnResult) msg.obj;
                     if (result.getCode() == 1) {
-                        List<User> users = (List<User>) JsonUtils.jsonToList(JsonUtils.beanToJson(result.getInfo()), new TypeToken<List<User>>(){}.getType());
+                        List<User> users = (List<User>) JsonUtils.jsonToList(JsonUtils.beanToJson(result.getInfo()), new TypeToken<List<User>>() {
+                        }.getType());
                         UserAdapter adapter = new UserAdapter(SearchFriendActivity.this, R.layout.user_item, users);
                         listView.setAdapter(adapter);
 
                     } else {
-                        Toast.makeText(activity, (String)result.getInfo(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(activity, (String) result.getInfo(), Toast.LENGTH_SHORT).show();
                     }
                     break;
                 default:

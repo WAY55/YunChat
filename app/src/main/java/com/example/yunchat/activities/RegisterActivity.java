@@ -123,14 +123,10 @@ public class RegisterActivity extends AppCompatActivity {
     @SuppressLint("HandlerLeak")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
-
         loadingDialog = LoadingDialog.getInstance(RegisterActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        //初始化加载动画
-
         //Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.register_toolbar);
         setSupportActionBar(toolbar);
@@ -141,12 +137,9 @@ public class RegisterActivity extends AppCompatActivity {
         //去掉左侧标题
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         //Toolbar回退键事件
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-                overridePendingTransition(R.anim.close_enter_t, R.anim.close_exit_t);
-            }
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.close_enter_t, R.anim.close_exit_t);
         });
 
         //初始化handler

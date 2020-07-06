@@ -26,6 +26,7 @@ import com.example.yunchat.activities.HomeActivity;
 import com.example.yunchat.activities.LoginActivity;
 import com.example.yunchat.configs.IpConfig;
 import com.example.yunchat.models.User;
+import com.example.yunchat.task.ImageTask;
 import com.example.yunchat.utils.BitmapUtils;
 import com.example.yunchat.utils.HttpUtils;
 import com.example.yunchat.utils.LoginUtils;
@@ -156,13 +157,11 @@ public class MyFragment extends Fragment {
     }
 
     private void initAvatar() {
-        new Thread(() -> {
-            String url = "http://" + IpConfig.getAddress() + "/avatar/" + user.getAvatar();
-            Bitmap bitmap = HttpUtils.getUrlImage(url);
-            Message message = myHandler.obtainMessage();
-            message.what = 1;
-            message.obj = bitmap;
-            myHandler.sendMessage(message);
-        }).start();
+        try {
+            ImageTask task = new ImageTask(imageView);
+            task.execute(user.getAvatar());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

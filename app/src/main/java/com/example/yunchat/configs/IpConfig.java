@@ -6,7 +6,7 @@ package com.example.yunchat.configs;
  */
 public class IpConfig {
 
-    private static final String IP = "192.168.1.102";
+    private static final String IP = "119.134.182.132";
     private static final String PORT = "8080";
 
     public static String getAddress() {

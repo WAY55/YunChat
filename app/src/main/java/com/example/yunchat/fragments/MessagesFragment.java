@@ -4,29 +4,22 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.yunchat.R;
 import com.example.yunchat.activities.HomeActivity;
 import com.example.yunchat.activities.SearchFriendActivity;
-import com.example.yunchat.dialogs.DialogMessage;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,12 +50,7 @@ public class MessagesFragment extends Fragment implements Toolbar.OnMenuItemClic
         toolbar.setOnMenuItemClickListener(this);
         unbinder = ButterKnife.bind(this, view);
         button.setOnClickListener(v -> {
-            DialogMessage dialog = new DialogMessage(getContext(),activity);
-            dialog.show();
-            Window window = dialog.getWindow();
-            //通过window去掉对话框的默认背景
-            assert window != null;
-            window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         });
         return view;
 

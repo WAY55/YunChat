@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import com.example.yunchat.R;
 import com.example.yunchat.configs.IpConfig;
 import com.example.yunchat.models.User;
+import com.example.yunchat.task.ImageTask;
 import com.example.yunchat.utils.HttpUtils;
 
 import org.w3c.dom.Text;
@@ -29,7 +30,7 @@ import java.util.List;
  */
 public class UserAdapter extends ArrayAdapter {
     private final int resourceId;
-    private final String urlPath = "http://" + IpConfig.getAddress() + "/avatar/";
+
     public UserAdapter(@NonNull Context context, int resource, List<User> users) {
         super(context, resource, users);
         this.resourceId = resource;
@@ -44,8 +45,8 @@ public class UserAdapter extends ArrayAdapter {
         TextView userName = (TextView) view.findViewById(R.id.user_name);
         //获取头像
         try {
-            ImagesTask task = new ImagesTask(userImage);
-            task.execute(urlPath + user.getAvatar());
+            ImageTask task = new ImageTask(userImage);
+            task.execute(user.getAvatar());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,30 +54,6 @@ public class UserAdapter extends ArrayAdapter {
         return view;
     }
 
-    private class ImagesTask extends AsyncTask<String, Void, Bitmap> {
-        private ImageView thisImage;
-
-        public ImagesTask(ImageView thisImage) {
-            this.thisImage = thisImage;
-        }
-
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            Bitmap bitmap = null;
-            try {
-                bitmap = HttpUtils.getUrlImage(strings[0]);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            thisImage.setImageBitmap(bitmap);
-            super.onPostExecute(bitmap);
-        }
-    }
 
 
 }
