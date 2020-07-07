@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.yunchat.R;
 import com.example.yunchat.activities.HomeActivity;
+import com.example.yunchat.activities.MessageServerActivity;
 import com.example.yunchat.activities.SearchFriendActivity;
 
 import butterknife.BindView;
@@ -33,7 +34,7 @@ import butterknife.Unbinder;
 public class MessagesFragment extends Fragment implements Toolbar.OnMenuItemClickListener {
 
     private static final String TAG = "MessagesFragment";
-    @BindView(R.id.shabichenshuxu)
+    @BindView(R.id.ChatRoom)
     Button button;
     Unbinder unbinder;
     @Nullable
@@ -50,7 +51,7 @@ public class MessagesFragment extends Fragment implements Toolbar.OnMenuItemClic
         toolbar.setOnMenuItemClickListener(this);
         unbinder = ButterKnife.bind(this, view);
         button.setOnClickListener(v -> {
-
+            Intent intent = new Intent(this, MessageServerActivity.class);
         });
         return view;
 

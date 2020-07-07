@@ -36,7 +36,7 @@ public class MessageServerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_message_server);
 
         rv = (RecyclerView) findViewById(R.id.message_rv);
         et = (EditText) findViewById(R.id.message_et);

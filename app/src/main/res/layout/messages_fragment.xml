@@ -32,8 +32,8 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/shabichenshuxu"
-        android:text="调用对话框"
+        android:id="@+id/ChatRoom"
+        android:text="聊天室"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
