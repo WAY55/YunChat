@@ -16,6 +16,8 @@ import com.example.yunchat.models.User;
 import com.example.yunchat.models.UserMessage;
 import com.example.yunchat.adapters.MessageAdapter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -50,7 +52,7 @@ public class MessageServerActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    socket = new Socket("192.168.1.111", 10010);
+                    socket = new Socket("192.168.0.113", 10010);
                     InputStream inputStream = socket.getInputStream();
                     byte[] buffer = new byte[1024];
                     int len;
@@ -78,10 +80,9 @@ public class MessageServerActivity extends AppCompatActivity {
                     public void run() {
                         try {
                             OutputStream outputStream = socket.getOutputStream();
-                            SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");    //设置日期格式
+                            SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
                             outputStream.write((socket.getLocalPort() + "//" + data + "//" + df.format(new Date())).getBytes("utf-8"));
                             outputStream.flush();
-
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -94,7 +95,7 @@ public class MessageServerActivity extends AppCompatActivity {
 
     private class MyHandler extends Handler {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleMessage(@NotNull Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
                 User user = new User();
