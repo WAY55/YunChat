@@ -8,6 +8,9 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.widget.ImageView;
+
+import com.example.yunchat.task.ImageTask;
 
 /**
  * 图片操作类
@@ -66,4 +69,13 @@ public class BitmapUtils {
         return output;
     }
 
+
+    public static void initAvatar(String path, ImageView imageView) {
+        try {
+            ImageTask task = new ImageTask(imageView);
+            task.execute(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

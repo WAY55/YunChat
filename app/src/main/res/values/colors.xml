@@ -9,4 +9,5 @@
     <color name="sex_radio_selected">#80CBC4</color>
     <color name="button_slate_gray">#708090</color>
     <color name="little_green">#9EEA6A</color>
+    <color name="no_importance">#c2c2c2</color>
 </resources>

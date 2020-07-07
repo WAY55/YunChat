@@ -9,4 +9,5 @@
     <dimen name="dialog_message_input">20sp</dimen>
     <dimen name="normal_text_big">20sp</dimen>
     <dimen name="normal_text_middle">15sp</dimen>
+    <dimen name="normal_text_small">10sp</dimen>
 </resources>

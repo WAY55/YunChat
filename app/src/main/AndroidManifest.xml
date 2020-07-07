@@ -16,8 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".activities.NewFriendActivity"></activity>
+        <activity android:name=".activities.AddFriendMessageActivity" />
         <activity android:name=".activities.SearchFriendActivity" />
-        <activity android:name=".activities.AddFriendActivity"/>
+        <activity android:name=".activities.AddFriendActivity" />
         <activity
             android:name=".dialogs.DialogMessage"
             tools:ignore="Instantiatable" />

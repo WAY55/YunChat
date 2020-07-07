@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activities.AddFriendMessageActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:theme="@style/black_toolbar_theme"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/add_friend"
+        app:titleTextColor="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/add_friend_avatar"
+                android:layout_width="60dp"
+                android:layout_height="60dp" />
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/add_friend_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:maxLines="3"
+                android:textSize="@dimen/normal_text_big" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:weightSum="10"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+
+        <EditText
+            android:id="@+id/add_friend_message"
+            android:padding="10dp"
+            android:gravity="top"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:layout_height="100dp"
+            android:layout_weight="8"
+            android:background="@drawable/add_friend_message" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:background="@color/white"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+        <Button
+            android:id="@+id/add_friend_button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:text="@string/add_friend"
+            android:textSize="@dimen/normal_text_middle"
+            android:background="@drawable/add_friend_button"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

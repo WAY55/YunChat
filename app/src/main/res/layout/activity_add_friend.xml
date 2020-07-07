@@ -13,6 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
+            android:theme="@style/black_toolbar_theme"
             android:id="@+id/friend_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -20,7 +21,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="">
+            app:titleTextColor="@color/black"
+            app:title="@string/add_friend">
 
         </androidx.appcompat.widget.Toolbar>
     </LinearLayout>
@@ -190,6 +192,7 @@
         android:gravity="center"
         android:layout_marginTop="10dip">
         <Button
+            android:id="@+id/add_friend_button1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="8"

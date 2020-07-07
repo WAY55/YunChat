@@ -1,5 +1,6 @@
 package com.example.yunchat.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -71,10 +72,11 @@ public class HomeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     public static JWebSocketClient client;
     private User user;
-
+    public static Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         //启动对话框内的服务
 //        DialogMessageManager.startServer();
         //检测是否登录
@@ -98,7 +100,6 @@ public class HomeActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        client.send("111");
         setContentView(R.layout.activity_home);
 
 

@@ -68,17 +68,24 @@ public class MyFragment extends Fragment {
     @BindView(R.id.logout_pressed_area)
     LinearLayout logout;
     MyHandler myHandler;
+    AppCompatActivity activity;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.my_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
-        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity = (AppCompatActivity) getActivity();
         assert activity != null;
         user = LoginUtils.getLoginInfo(activity);
         activity.setSupportActionBar(toolbar);
+        init();
+
+        return view;
+    }
+
+    private void init() {
         //初始化handler
-         myHandler = new MyHandler();
+        myHandler = new MyHandler();
         //获取头像
         initAvatar();
         //初始化性别
@@ -92,18 +99,15 @@ public class MyFragment extends Fragment {
         //初始化地址
         initAddress();
         //添加注销事件
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginUtils.saveLoginInfo(null, activity);
-                //转至登录页面
-                Intent intent = new Intent(activity, LoginActivity.class);
-                startActivity(intent);
-                activity.finish();
-            }
+        logout.setOnClickListener(v -> {
+            LoginUtils.saveLoginInfo(null, activity);
+            //转至登录页面
+            Intent intent = new Intent(activity, LoginActivity.class);
+            startActivity(intent);
+            activity.finish();
         });
-        return view;
     }
+
 
     private void initAddress() {
         myAddress.setText(user.getAddress());

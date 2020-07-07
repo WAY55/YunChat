@@ -128,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
         //Toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.register_toolbar);
+        Toolbar toolbar = findViewById(R.id.register_toolbar);
         setSupportActionBar(toolbar);
         //添加默认的返回图标
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -141,8 +141,96 @@ public class RegisterActivity extends AppCompatActivity {
             finish();
             overridePendingTransition(R.anim.close_enter_t, R.anim.close_exit_t);
         });
+        init();
 
-        //初始化handler
+
+
+
+        user = new User();
+
+
+
+    }
+
+    private void init() {
+        initHandler();
+        initButton();
+        initTimePicker();
+    }
+
+    private void initTimePicker() {
+        //日期输入框单击显示日期选择器
+        birthdayInput.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //显示日期选择器
+                timePickerView.show(birthdayInput);
+            }
+        });
+        //构造时间选择器
+        timePickerView = new TimePickerView.Builder(this, (date, v) -> birthdayInput.setText(getTimes(date)))
+                .setType(new boolean[]{true, true, true, false, false, false})
+                .setLabel(YEAR, MONTH, DAY, "", "", "")
+                .build();
+    }
+
+    private void initButton() {
+        //注册点击事件
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @SneakyThrows
+            @Override
+            public void onClick(View v) {
+
+                //获取各项信息值
+                user.setUsername(InfoUtils.getEditTextValue(usernameInput));
+                user.setPassword(InfoUtils.getEditTextValue(passwordInput));
+                String confirmPasswordValue = InfoUtils.getEditTextValue(confirmPasswordInput);
+                user.setEmail(InfoUtils.getEditTextValue(emailInput));
+                user.setSex((byte) getSex());
+                user.setBirthday(InfoUtils.getEditTextValue(birthdayInput));
+                user.setAddress(InfoUtils.getEditTextValue(addressInput));
+
+                //进行数据处理
+                if (!checkEmpty(user, confirmPasswordValue)) {
+                    return;
+                }
+                if (!checkRules(user)) {
+                    return;
+                }
+                if (!user.getPassword().equals(confirmPasswordValue)) {
+                    Toast.makeText(RegisterActivity.this, PASSWORD_NO_MATCHING, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //加载动画
+                loadingDialog.show();
+                //将密码进行MD5加密
+                user.setPassword(InfoUtils.md5(user.getPassword()));
+
+
+                //创建线程池
+                cachedThreadPool = Executors.newCachedThreadPool();
+                cachedThreadPool.execute(() -> {
+                    Message message = handler.obtainMessage();
+                    String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(user), REGISTER_URL);
+                    if ("fail".equals(result)) {
+                        message.what = -1;
+                        handler.sendMessage(message);
+                        return;
+                    }
+                    ReturnResult returnResult = JsonUtils.getResult(result);
+                    //向主线程传递参数
+                    message.what = 1;
+                    message.obj = returnResult;
+                    handler.sendMessage(message);
+
+                });
+
+            }
+        });
+    }
+
+    @SuppressLint("HandlerLeak")
+    private void initHandler() {
         handler = new Handler() {
             @Override
             public void handleMessage(@NonNull Message msg) {
@@ -205,81 +293,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         };
-
-        //日期输入框单击显示日期选择器
-        birthdayInput.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //显示日期选择器
-                timePickerView.show(birthdayInput);
-            }
-        });
-        //构造时间选择器
-        timePickerView = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
-            @Override
-            public void onTimeSelect(Date date, View v) {
-                birthdayInput.setText(getTimes(date));
-            }
-        })
-                .setType(new boolean[]{true, true, true, false, false, false})
-                .setLabel(YEAR, MONTH, DAY, "", "", "")
-                .build();
-
-        user = new User();
-        //注册点击事件
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @SneakyThrows
-            @Override
-            public void onClick(View v) {
-
-                //获取各项信息值
-                user.setUsername(InfoUtils.getEditTextValue(usernameInput));
-                user.setPassword(InfoUtils.getEditTextValue(passwordInput));
-                String confirmPasswordValue = InfoUtils.getEditTextValue(confirmPasswordInput);
-                user.setEmail(InfoUtils.getEditTextValue(emailInput));
-                user.setSex((byte) getSex());
-                user.setBirthday(InfoUtils.getEditTextValue(birthdayInput));
-                user.setAddress(InfoUtils.getEditTextValue(addressInput));
-
-                //进行数据处理
-                if (!checkEmpty(user, confirmPasswordValue)) {
-                    return;
-                }
-                if (!checkRules(user)) {
-                    return;
-                }
-                if (!user.getPassword().equals(confirmPasswordValue)) {
-                    Toast.makeText(RegisterActivity.this, PASSWORD_NO_MATCHING, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                //加载动画
-                loadingDialog.show();
-                //将密码进行MD5加密
-                user.setPassword(InfoUtils.md5(user.getPassword()));
-
-
-                //创建线程池
-                cachedThreadPool = Executors.newCachedThreadPool();
-                cachedThreadPool.execute(() -> {
-                    Message message = handler.obtainMessage();
-                    String result = HttpUtils.sendJsonPost(JsonUtils.beanToJson(user), REGISTER_URL);
-                    if ("fail".equals(result)) {
-                        message.what = -1;
-                        handler.sendMessage(message);
-                        return;
-                    }
-                    ReturnResult returnResult = JsonUtils.getResult(result);
-                    //向主线程传递参数
-                    message.what = 1;
-                    message.obj = returnResult;
-                    handler.sendMessage(message);
-
-                });
-
-            }
-        });
-
-
     }
 
     /**

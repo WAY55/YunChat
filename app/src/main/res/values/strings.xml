@@ -33,4 +33,7 @@
     <string name="add_friend_username">Please enter your friend\'s username</string>
     <string name="search">Search</string>
     <string name="add_friend">Add Friend</string>
+    <string name="new_friends">New Friends</string>
+    <string name="accept">Accept</string>
+    <string name="has_accept">Has Accept</string>
 </resources>

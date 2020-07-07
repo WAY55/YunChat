@@ -4,15 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/search_friends_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        android:title="@string/add_friend"
+        android:background="@color/colorPrimary"
+        android:theme="@style/black_toolbar_theme"
+        app:titleTextColor="@color/black"/>
 
     <LinearLayout
         android:id="@+id/linearLayout10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="10"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/search_friends_toolbar">
 
         <EditText
             android:id="@+id/search_friend_edittext"

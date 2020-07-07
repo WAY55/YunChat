@@ -2,6 +2,7 @@ package com.example.yunchat.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -55,6 +56,8 @@ public class SearchFriendActivity extends AppCompatActivity {
      */
     @BindView(R.id.search_friend_edittext)
     EditText searchText;
+    @BindView(R.id.search_friends_toolbar)
+    Toolbar toolbar;
     /**
      * 线程池
      */
@@ -73,7 +76,7 @@ public class SearchFriendActivity extends AppCompatActivity {
         handler = new SearchFriendHandler(this);
         listView = findViewById(R.id.search_friend_list);
         //进行搜索
-
+        init();
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -100,6 +103,24 @@ public class SearchFriendActivity extends AppCompatActivity {
             intent.putExtra("user", user);
             startActivityForResult(intent, 2);
             overridePendingTransition(R.anim.open_enter_t, R.anim.open_exit_t);
+        });
+    }
+
+    private void init() {
+        initToolBar();
+    }
+
+    private void initToolBar() {
+        setSupportActionBar(toolbar);
+        //添加默认的返回图标
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //设置返回键可用
+        getSupportActionBar().setTitle(R.string.add_friend);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        //Toolbar回退键事件
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+            overridePendingTransition(R.anim.close_enter_t, R.anim.close_exit_t);
         });
     }
 

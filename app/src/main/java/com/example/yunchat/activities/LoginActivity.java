@@ -199,7 +199,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    @SuppressLint("HandlerLeak")
+
     class  LoginHandler extends Handler {
         @Override
         public void handleMessage(@NonNull Message msg) {
