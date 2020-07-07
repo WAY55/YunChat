@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 对话框信息管理类
+ * 信息管理类
  * @author 陈树旭
  */
-public class DialogMessageManager {
+public class MessageManager {
     private static Map<String, Socket> map = new HashMap<>();
     private static ServerThread serverThread = null;
 
@@ -47,13 +47,13 @@ public class DialogMessageManager {
                                 synchronized (this){
                                     map.put(IP, socket);
                                 }
-                                    InputStream is = socket.getInputStream();
-                                    byte[] b = new byte[1024];
-                                    int length;
-                                    while((length = is.read(b)) != -1){
-                                        String text = new String(b, 0, length);
-                                        System.out.println("接收的数据：" + text);
-                                    }
+                                InputStream is = socket.getInputStream();
+                                byte[] b = new byte[1024];
+                                int length;
+                                while((length = is.read(b)) != -1){
+                                    String text = new String(b, 0, length);
+                                    System.out.println("接收的数据：" + text);
+                                }
                             }catch (IOException e){
                                 e.printStackTrace();
                             }finally {

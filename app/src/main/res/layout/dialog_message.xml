@@ -5,7 +5,6 @@
     android:layout_width="400dp"
     android:layout_height="600dp"
     android:layout_weight="30"
-    tools:context=".dialogs.DialogMessage"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:background="@drawable/background_dialog">
@@ -27,7 +26,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
-            android:textColor="#000"
+            android:textColor="@color/black"
             android:textSize="20dp"
             android:text="用户名"/>
         <ImageButton
@@ -40,13 +39,24 @@
             android:contentDescription="TODO" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dialog_rv"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="25"
         android:layout_marginEnd="2dp"
-        android:layout_marginStart="2dp"/>
+        android:layout_marginStart="2dp">
+        <TextView
+            android:id="@+id/dialog_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:text="1321"
+            android:textColor="#11CF19"
+            android:textSize="18sp"
+            android:background="@drawable/background_dialog_button"/>
+    </RelativeLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -74,4 +84,5 @@
             android:background="@drawable/background_dialog_button"
             android:layout_gravity="center"/>
     </LinearLayout>
+
 </LinearLayout>

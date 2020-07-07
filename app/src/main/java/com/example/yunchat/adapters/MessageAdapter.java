@@ -1,4 +1,4 @@
-package com.example.yunchat.recyclerview;
+package com.example.yunchat.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * 对话框适配器
  * @author 陈树旭
  */
-public class DialogAdapter extends RecyclerView.Adapter {
+public class MessageAdapter extends RecyclerView.Adapter {
     private Context context;
     private ArrayList<UserMessage> messages;
     private static final int TYPE_LEFT = 1;
@@ -34,7 +34,7 @@ public class DialogAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public DialogAdapter(Context context) {
+    public MessageAdapter(Context context) {
         this.context = context;
     }
 
