@@ -52,6 +52,7 @@ public class MessagesFragment extends Fragment implements Toolbar.OnMenuItemClic
         unbinder = ButterKnife.bind(this, view);
         button.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), MessageServerActivity.class);
+            startActivity(intent);
         });
         return view;
 
