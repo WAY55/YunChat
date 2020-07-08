@@ -2,6 +2,7 @@ package com.example.yunchat.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -75,6 +76,9 @@ public class AddFriendActivity extends AppCompatActivity {
     }
 
     private void initButton() {
+        if (user.getOpenId().equals(HomeActivity.user.getOpenId())) {
+            button.setVisibility(View.INVISIBLE);
+        }
         button.setOnClickListener(v -> {
             Intent intent = new Intent(AddFriendActivity.this, AddFriendMessageActivity.class);
             intent.putExtra("user", user);

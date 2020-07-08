@@ -40,7 +40,7 @@ public class LoginUtils {
         }
 
         User user = (User) JsonUtils.jsonToBean(userJson, User.class);
-        if (user.getOpenId() == null || user.getOpenId().isEmpty()) {
+        if ( user.getOpenId().isEmpty()) {
             return null;
         } else {
             return user;

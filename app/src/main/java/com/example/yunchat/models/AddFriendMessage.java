@@ -1,5 +1,8 @@
 package com.example.yunchat.models;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +14,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddFriendMessage {
+public class AddFriendMessage implements Serializable {
+    private int id;
     private String sendUser;
     private String reviewUser;
     private String message;
+    private int accept;
 }

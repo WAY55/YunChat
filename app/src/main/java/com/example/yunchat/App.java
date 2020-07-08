@@ -1,6 +1,7 @@
 package com.example.yunchat;
 
 import android.app.Application;
+import android.os.Handler;
 
 import com.example.yunchat.models.User;
 
@@ -17,7 +18,15 @@ import lombok.NoArgsConstructor;
 
 
 public class App extends Application {
+    private Handler friendHandle = null;
 
+    public Handler getHandler() {
+        return friendHandle;
+    }
+
+    public void setHandler(Handler handler) {
+        this.friendHandle = handler;
+    }
 
     @Override
     public void onCreate() {

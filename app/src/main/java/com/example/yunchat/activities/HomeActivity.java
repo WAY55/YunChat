@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
      * 四个对应的内容页面
      */
     Fragment messageFragment;
-    Fragment friendsFragment;
+    public static Fragment friendsFragment;
     Fragment findFragment;
     Fragment myFragment;
 
@@ -72,7 +72,7 @@ public class HomeActivity extends AppCompatActivity {
      */
     BottomNavigationView bottomNavigationView;
     public static JWebSocketClient client;
-    private User user;
+    public static User user;
     public static Context context;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -118,6 +118,8 @@ public class HomeActivity extends AppCompatActivity {
         myInit = true;
 
         //默认显示消息页
+
+        friendsInit = showFragment(friendsFragment, friendsInit);
         messageInit = showFragment(messageFragment, messageInit);
         //底部导航栏允许自定义颜色
         bottomNavigationView = findViewById(R.id.home_tag);

@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".activities.NewFriendActivity"></activity>
+        <activity android:name=".activities.NewFriendActivity"/>
         <activity android:name=".activities.AddFriendMessageActivity" />
         <activity android:name=".activities.SearchFriendActivity" />
         <activity android:name=".activities.AddFriendActivity" />
@@ -30,7 +30,9 @@
         <activity android:name=".activities.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
 
+                <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

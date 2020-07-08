@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.yunchat.App;
-import com.example.yunchat.models.SocketMessage;
+import com.example.yunchat.activities.HomeActivity;
 import com.example.yunchat.utils.SocketUtils;
 import com.example.yunchat.utils.ToastUtils;
 
@@ -19,15 +19,10 @@ import java.net.URI;
 
 /**
  * WebSocket连接
- *
  * @author 曾健育
  */
 public class JWebSocketClient extends WebSocketClient {
-    private Context context;
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
+    SocketUtils utils = null;
 
     public JWebSocketClient(URI serverUri) {
         super(serverUri);
@@ -41,7 +36,9 @@ public class JWebSocketClient extends WebSocketClient {
     @Override
     public void onMessage(String message) {
         Log.d("JWebSocketClient", "onMessage():" + message);
-        SocketUtils utils = new SocketUtils(message);
+        if (utils == null) {
+            utils = new SocketUtils(message);
+        }
         utils.check();
     }
 

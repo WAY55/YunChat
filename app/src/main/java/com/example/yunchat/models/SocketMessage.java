@@ -1,5 +1,7 @@
 package com.example.yunchat.models;
 
+import java.io.Serializable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SocketMessage {
+public class SocketMessage implements Serializable {
     private Integer type;
     private Object content;
 }

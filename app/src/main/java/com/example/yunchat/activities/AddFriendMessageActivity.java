@@ -59,10 +59,12 @@ public class AddFriendMessageActivity extends AppCompatActivity {
             String myId = me.getOpenId();
             String yourId = friend.getOpenId();
             String msg = text.getText().toString();
-            AddFriendMessage message = new AddFriendMessage(myId, yourId, msg);
+            AddFriendMessage message = new AddFriendMessage();
+            message.setSendUser(myId);
+            message.setReviewUser(yourId);
+            message.setMessage(msg);
             SocketMessage socketMessage = new SocketMessage(1, message);
             String json = JsonUtils.beanToJson(socketMessage);
-            HomeActivity.client.setContext(AddFriendMessageActivity.this);
             HomeActivity.client.send(json);
             Toast.makeText(this, SEND_SUCCESS, Toast.LENGTH_SHORT).show();
             this.finish();
@@ -91,12 +93,17 @@ public class AddFriendMessageActivity extends AppCompatActivity {
         initAvatar(friend.getAvatar(), imageView);
         //初始化Toolbar
         initToolBar();
-
-
+        //初始化信息
+        initMessage();
         //初始化按钮
         initButton();
 
     }
+
+    private void initMessage() {
+        text.setText("你好，我是" + me.getUsername());
+    }
+
     private void getUser() {
         Intent intent = getIntent();
         friend = (User) intent.getSerializableExtra("user");
