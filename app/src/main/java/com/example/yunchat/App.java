@@ -19,7 +19,6 @@ import lombok.NoArgsConstructor;
 
 public class App extends Application {
     private Handler friendHandle = null;
-
     public Handler getHandler() {
         return friendHandle;
     }

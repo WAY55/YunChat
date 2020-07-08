@@ -36,13 +36,13 @@ public class SocketUtils {
 
     public void check() {
         int type = message.getType();
-        Log.d("abc", "check: " +type);
+        Message msg = new Message();
         switch (type) {
             case 1:
-                Message msg = new Message();
-                msg.what = 1;
-                Log.d("abc", String.valueOf(((App) ((HomeActivity) getContext()).getApplication()).getHandler() != null));
-                ((App) ((HomeActivity) getContext()).getApplication()).getHandler().sendMessage(msg);
+                ((App) ((HomeActivity) getContext()).getApplication()).getHandler().sendEmptyMessage(1);
+                break;
+            case 2:
+                ((App) ((HomeActivity) getContext()).getApplication()).getHandler().sendEmptyMessage(2);
                 break;
             default:
         }

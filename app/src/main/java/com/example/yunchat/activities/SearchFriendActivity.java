@@ -31,6 +31,7 @@ import com.example.yunchat.models.SearchInfo;
 import com.example.yunchat.models.User;
 import com.example.yunchat.utils.HttpUtils;
 import com.example.yunchat.utils.JsonUtils;
+import com.example.yunchat.utils.ToastUtils;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -166,7 +167,7 @@ public class SearchFriendActivity extends AppCompatActivity {
                         listView.setAdapter(adapter);
 
                     } else {
-                        Toast.makeText(activity, (String) result.getInfo(), Toast.LENGTH_SHORT).show();
+                        ToastUtils.showShortToast((String) result.getInfo());
                     }
                     break;
                 default:
