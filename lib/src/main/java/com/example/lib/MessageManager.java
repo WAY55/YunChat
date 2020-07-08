@@ -23,9 +23,9 @@ public class MessageManager {
         public ServerThread() {
             try {
                 serverSocket = new ServerSocket(port);
-                System.out.println("服务器启动成功" + "port" + port);
+                System.out.println("Server started successfully:" + "port" + port);
             }catch (IOException e){
-                System.out.println("服务器启动失败,失败原因：" + e.getMessage());
+                System.out.println("Server failed to start, reason for failure：" + e.getMessage());
             }
         }
 
@@ -34,11 +34,11 @@ public class MessageManager {
             try {
                 while (!exit){
                     //等待获取手机连接
-                    System.out.println("等待手机连接......");
+                    System.out.println("Waiting for phone to connect......");
                     final Socket socket = serverSocket.accept();
                     //获取连接IP以及端口号
                     final String IP = socket.getRemoteSocketAddress().toString();
-                    System.out.println("连接成功，IP：" + IP);
+                    System.out.println("connection succeeded,IP:" + IP);
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
@@ -52,13 +52,13 @@ public class MessageManager {
                                 int length;
                                 while((length = is.read(b)) != -1){
                                     String text = new String(b, 0, length);
-                                    System.out.println("接收的数据：" + text);
+                                    System.out.println("Received data:" + text);
                                 }
                             }catch (IOException e){
                                 e.printStackTrace();
                             }finally {
                                 synchronized (this){
-                                    System.out.println("关闭链接：" + IP);
+                                    System.out.println("Close link：" + IP);
                                     map.remove(IP);
                                 }
                             }
@@ -75,7 +75,7 @@ public class MessageManager {
             if (serverSocket != null){
                 try {
                     serverSocket.close();
-                    System.out.println("服务关闭成功");
+                    System.out.println("Service closed successfully");
                 }catch (IOException e){
                     e.printStackTrace();
                 }
@@ -84,13 +84,13 @@ public class MessageManager {
     }
 
     public static ServerThread startServer(){
-        System.out.println("服务开启");
+        System.out.println("Service start");
         if (serverThread != null){
             showDown();
         }
         serverThread = new ServerThread();
         new Thread(serverThread).start();
-        System.out.println("服务开启成功");
+        System.out.println("Service started successfully");
         return serverThread;
     }
 
