@@ -1,6 +1,7 @@
 package com.example.yunchat.activities;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +75,7 @@ public class AddFriendActivity extends AppCompatActivity {
         init();
 
     }
+
 
     private void initButton() {
         if (user.getOpenId().equals(HomeActivity.user.getOpenId())) {

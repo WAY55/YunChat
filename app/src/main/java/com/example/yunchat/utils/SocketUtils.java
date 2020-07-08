@@ -19,6 +19,10 @@ import com.example.yunchat.fragments.FriendsFragment;
 import com.example.yunchat.models.AddFriendMessage;
 import com.example.yunchat.models.SocketMessage;
 
+/**
+ * Socket信息检查
+ * @author 曾健育
+ */
 public class SocketUtils {
     private SocketMessage message;
     private static Context context;
