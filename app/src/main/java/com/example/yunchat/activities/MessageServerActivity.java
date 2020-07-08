@@ -52,7 +52,8 @@ public class MessageServerActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    socket = new Socket("localhost", 11111);
+                    //局域网连接，host需要写入自己的IP地址，并且在lib中的MyClass中启动服务器。
+                    socket = new Socket("192.168.0.106", 11111);
                     InputStream inputStream = socket.getInputStream();
                     byte[] buffer = new byte[1024];
                     int len;
