@@ -77,7 +77,7 @@ public class FriendsFragment extends Fragment {
         initList();
     }
 
-    private void initList() {
+    public void initList() {
         try {
             MyFriendsTask task = new MyFriendsTask(listView, getActivity());
             task.execute(HomeActivity.user);
@@ -153,6 +153,9 @@ public class FriendsFragment extends Fragment {
                     ToastUtils.showShortToast("您有一条好友请求，请前往查看！");
                 case 2:
                     newIcon.setVisibility(View.VISIBLE);
+                    break;
+                case 3:
+                    initList();
                     break;
                 default:
             }
