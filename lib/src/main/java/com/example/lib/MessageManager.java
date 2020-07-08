@@ -1,4 +1,4 @@
-package com.example.yunchat.server;
+package com.example.lib;
 
 import java.io.IOException;
 import java.io.InputStream;

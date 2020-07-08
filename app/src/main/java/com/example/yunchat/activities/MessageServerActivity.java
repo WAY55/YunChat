@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.ServerSocket;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,8 +52,7 @@ public class MessageServerActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    ServerSocket server = new ServerSocket(26142);
-                    socket = server.accept();
+                    socket = new Socket("localhost", 11111);
                     InputStream inputStream = socket.getInputStream();
                     byte[] buffer = new byte[1024];
                     int len;
